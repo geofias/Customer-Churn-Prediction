@@ -64,7 +64,6 @@ To develop a predictive model that accurately identifies churned customers using
 - Precision, Recall, F1-score
 - AUC-ROC curve
 - Precision-Recall curve
-- Calibration curve
 - Threshold optimization using F1-score as objective
 
 #### Final Confusion Matrix (Test Set)
