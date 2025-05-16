@@ -28,7 +28,7 @@ To develop a predictive model that accurately identifies churned customers using
 
 ---
 
-## Dataset
+## 🧾 Dataset
 
 - **Source**: [Telco Customer Churn Dataset on Kaggle](https://www.kaggle.com/blastchar/telco-customer-churn)
 - **Size**: ~7000 rows, multiple features including categorical, numerical, and target (`Churn`)
