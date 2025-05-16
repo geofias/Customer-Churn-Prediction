@@ -1,122 +1,107 @@
-# Customer Churn Prediction
+# 📦 Customer Churn Prediction
 
-A full-cycle data science project to predict customer churn using machine learning and deep learning models. Includes data extraction via SQL, model building in Python, and interactive business dashboards using Power BI.
-
----
-
-## Table of Contents
-- [Project Overview](#project-overview)
-- [Objectives](#objectives)
-- [Tools & Technologies](#tools--technologies)
-- [Dataset](#dataset)
-- [Workflow](#workflow)
-- [Machine Learning Models](#machine-learning-models)
-- [Deep Learning Model](#deep-learning-model)
-- [Power BI Dashboard](#power-bi-dashboard)
-- [Results](#results)
-- [Conclusion](#conclusion)
-- [Future Work](#future-work)
+A full-cycle data science project to predict customer churn using machine learning. Includes data extraction via SQL, model building in Python, and interactive business dashboards using Power BI.
 
 ---
 
-## Project Overview
-
-This project addresses customer churn prediction using structured customer data. It compares traditional machine learning models with deep learning approaches, aiming to provide actionable insights for business stakeholders through an interactive Power BI dashboard.
-
----
-
-## Objectives
-
-- Use SQL for data extraction and preprocessing.
-- Perform EDA and feature engineering with Python.
-- Train and evaluate multiple classification models.
-- Build and evaluate a simple neural network using TensorFlow/Keras.
-- Visualize key business insights and churn risk using Power BI.
+## 📌 Project Overview
+This project focuses on building a machine learning model to predict customer churn using a real-world dataset. The aim is to develop a classifier that can help a company identify customers likely to cancel their subscription, enabling them to take proactive retention actions.
 
 ---
 
-## Tools & Technologies
+## 🎯 Objectives
+To develop a predictive model that accurately identifies churned customers using customer behavioral and service-related features. The project uses:
+- Feature engineering
+- Handling of imbalanced data
+- Advanced evaluation metrics
+- Threshold optimization
+- Visual business insights via a Power BI dashboard
 
-| Category        | Tools                                    |
-|----------------|-------------------------------------------|
-| Languages       | Python, SQL                              |
-| Libraries       | pandas, scikit-learn, XGBoost, seaborn   |
-| Deep Learning   | TensorFlow, Keras                        |
-| Visualization   | matplotlib, seaborn, **Power BI**        |
-| Version Control | Git, GitHub                              |
+---
+
+## 🛠️ Technologies Used
+
+- Python (Pandas, Numpy, Scikit-learn, Matplotlib, Seaborn)
+- SMOTE (imbalanced-learn)
+- Power BI (for business-oriented visualization)
+- Jupyter Notebook
 
 ---
 
 ## Dataset
 
 - **Source**: [Telco Customer Churn Dataset on Kaggle](https://www.kaggle.com/blastchar/telco-customer-churn)
-- **Features**: Demographics, services used, billing data
-- **Target**: `Churn` (Yes/No)
+- **Size**: ~7000 rows, multiple features including categorical, numerical, and target (`Churn`)
+- **Target variable**: `Churn` (binary: Yes/No)
 
 ---
 
 ## Workflow
 
-### 1. SQL-Based Data Extraction
-```sql
-SELECT customerID, gender, SeniorCitizen, tenure, MonthlyCharges, TotalCharges
-FROM Customers
-WHERE Contract = 'Month-to-month';
-```
+### 1. 🔍 Exploratory Data Analysis (EDA)
+- Identified skewed distributions: `TotalCharges` was right-skewed; `tenure` and `MonthlyCharges` showed bimodal patterns.
+- Used `np.log1p` to reduce skewness.
+- Month-to-month contract type had the most churned customers.
+- The majority of customers that churned had an electronic check payment method.
+- Churned customers also exhibited the highest monthly charges.
 
-### 2. Data Preprocessing (Python)
-- Handle missing values
-- One-hot encoding for categorical features
-- Standardization of continuous variables
+### 2. ⚖️ Data Preprocessing (Python)
+- Label Encoding for binary features
+- One-hot Encoding for multi-category features
+- `SMOTE` to balance minority class (`Churn = Yes`)
 
-### 3. Exploratory Data Analysis
-- Churn rate by gender, contract type
-- Distribution plots and heatmaps
+### 3. 📈 Modeling
+- **Model Used**: `AdaBoostClassifier`
+- **Train-Test Split**: 85/15
+- **Best Performance on Test Set**:
+  - **F1 Score**: 0.62
+  - **Recall**: 0.78
+  - **Precision**: 0.52
+  - **AUC**: 0.83 (based on predicted probabilities)
 
-## Machine Learning Models
-- Logistic Regression
-- Random Forest
-- XGBoost
+#### Evaluation Metrics
+- Confusion matrix
+- Precision, Recall, F1-score
+- AUC-ROC curve
+- Precision-Recall curve
+- Calibration curve
+- Threshold optimization using F1-score as objective
 
-### Evaluation Metrics:
-- Accuracy
-- F1 Score
-- Precision/Recall
-- ROC-AUC
-- SHAP/LIME interpretability
+#### Final Confusion Matrix (Test Set)
+|            | Predicted No | Predicted Yes |
+|------------|--------------|---------------|
+| Actual No  | TN = 564     | FP = 207      |
+| Actual Yes | FN = 62      | TP = 222      |
 
-## Deep Learning Model
-- 3-layer neural network using Keras
+### 4. 🧠 Interpretation
+- The model favors **recall**, capturing most customers at risk of churning.
+- Precision is moderate — acceptable when recall is business-critical.
+- The model is **well-calibrated** and **robust**, making it suitable for deployment in a business environment.
 
-```
-model = Sequential([
-    Dense(64, activation='relu', input_shape=(X.shape[1],)),
-    Dropout(0.3),
-    Dense(32, activation='relu'),
-    Dense(1, activation='sigmoid')
-])
-```
+---
 
-- Binary Crossentropy Loss
-- Adam Optimizer
-- Epoch tuning for convergence
+## 📊 Power BI Dashboard
+A Power BI dashboard was created to communicate findings with non-technical stakeholders. It summarizes key insights and model implications in an interactive, visual format.
 
-## Power BI Dashboard
-Key visuals created in Power BI include:
-- Churn Risk by Tenure Group
-- Contract Type vs Churn Rate
-- Predicted vs Actual Churn
-- Monthly Charges vs Churn Probability
+The Dashboard created in Power BI includes:
+- Overview Page
+- Customer Profile Analysis
+- Tenure & Financial Analysis
+- Demographic Analysis
 
 **Link to .pbix file or published report**: [Churn Report](https://www.kaggle.com/blastchar/telco-customer-churn)
 
-## Results
-**Insert Table of Models Performance**
+## 🚀 Next Steps
+- Hyperparameter tuning with GridSearchCV
+- Add explainability with SHAP values
+- Deploy model via Flask or Streamlit
+- Share Power BI dashboard via public link or PDF
 
-## Conclusion
-This project demonstrates that both tree-based models and neural networks can effectively predict customer churn. Feature interpretability and business dashboards provide tangible value to non-technical stakeholders.
+## 🧾 License
+MIT License
 
-## Future Work
-- Deploy model as an API for live churn scoring
-- Include time-based behavioral data
-- Improve Power BI dashboard with geographic and revenue metrics
+---
+
+> **Author**: Tamir Chong  
+> **LinkedIn**: [https://www.linkedin.com/in/tamirchong/](https://www.linkedin.com/in/tamirchong/)  
+> **Email**: tamir-chong@hotmail.com
