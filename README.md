@@ -89,7 +89,7 @@ The Dashboard created in Power BI includes:
 - Tenure & Financial Analysis
 - Demographic Analysis
 
-**Link to .pbix file or published report**: [Churn Report](outputs/PowerBI_Report/Churn_PowerBI_Report.pdf)
+**Link to .pdf file report**: [Churn Report](outputs/PowerBI_Report/Churn_PowerBI_Report.pdf)
 
 ## 🚀 Next Steps
 - Hyperparameter tuning with GridSearchCV
