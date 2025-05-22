@@ -1,7 +1,7 @@
 # 📦 Customer Churn Prediction
 
 A full-cycle data science project to predict customer churn using machine learning. Includes data extraction via SQL, model building in Python, and interactive business dashboards using Power BI.
-
+![Alt Text](outputs/PowerBI_Report/Report Images/Churn_P1.jpg)
 ---
 
 ## 📌 Project Overview
